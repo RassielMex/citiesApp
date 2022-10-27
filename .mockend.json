@@ -11,7 +11,7 @@
         "Cd Juarez"
       ]
     },
-    "indicador1": { "string": [9, 1, 4, 8, 5, 10, 7] },
-    "indicador2": { "string": [15, 10, 10, 8, 8, 10, 9] }
+    "indicador1": { "int": [9, 1, 4, 8, 5, 10, 7] },
+    "indicador2": { "int": [15, 10, 10, 8, 8, 10, 9] }
   }
 }
