@@ -1,14 +1,17 @@
 {
-  "Post": {
-    "title": { "string": {} },
-    "comments": {
-      "hasMany": "Comment"
-    }
-  },
-  "Comment": {
-    "body": { "string": {} },
-    "post": {
-      "belongsTo": "Post"
-    }
+  "City": {
+    "ciudades": {
+      "string": [
+        "Merida",
+        "Monterrey",
+        "Guadalajara",
+        "Puebla",
+        "Tijuana",
+        "Toluca",
+        "Cd Juarez"
+      ]
+    },
+    "indicador1": { "string": [9, 1, 4, 8, 5, 10, 7] },
+    "indicador2": { "string": [15, 10, 10, 8, 8, 10, 9] }
   }
 }
