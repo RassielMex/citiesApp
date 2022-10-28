@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-const Graph = ({ data }) => {
+const Graph = React.forwardRef(({ data }, ref) => {
   const { cities, indicator1, indicator2 } = data;
 
   const options = {
@@ -53,9 +53,9 @@ const Graph = ({ data }) => {
 
   return (
     <div>
-      <Bar options={options} data={graphData} />;
+      <Bar options={options} data={graphData} ref={ref} />;
     </div>
   );
-};
+});
 
 export default Graph;
