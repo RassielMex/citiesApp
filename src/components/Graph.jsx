@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -19,8 +20,11 @@ ChartJS.register(
   Legend
 );
 
-const Graph = React.forwardRef(({ data }, ref) => {
-  const { cities, indicator1, indicator2 } = data;
+const Graph = React.forwardRef((props, ref) => {
+  const filteredData = useSelector((state) => {
+    return state.data.filtered;
+  });
+  const { cities, indicator1, indicator2 } = filteredData;
 
   const options = {
     responsive: true,
