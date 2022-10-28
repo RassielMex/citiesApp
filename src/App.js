@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -35,8 +36,9 @@ function App() {
   }, []);
 
   const handleChange = (e) => {
+    //Check for actual select value
     const value = e.target.value;
-
+    //Get data according to selected value
     if (value === 0) {
       setFilteredData(data);
     } else {
@@ -51,8 +53,11 @@ function App() {
   };
 
   const handleOnDownload = (e) => {
+    //Get id for button clicked
     const id = e.target.id;
+    //Converts chart canvas to URL base image
     const dataURL = chartRef.current.canvas.toDataURL("image/jpeg");
+    //Obtain PDF or Image accordin to id button
     if (id === "btn_PDF") {
       const doc = new jsPDF({
         orientation: "landscape",
@@ -68,7 +73,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Container>
       <FormControl fullWidth>
         <InputLabel id="select-label">City</InputLabel>
         <Select
@@ -110,7 +115,7 @@ function App() {
           Download as image
         </Button>
       </Stack>
-    </div>
+    </Container>
   );
 }
 
