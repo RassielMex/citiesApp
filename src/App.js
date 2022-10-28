@@ -11,45 +11,30 @@ import Graph from "./components/Graph";
 import { jsPDF } from "jspdf";
 import { Stack } from "@mui/system";
 import FileSaver from "file-saver";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData, filter } from "./store/data-slice";
 
 function App() {
-  const API_ENDPOINT = "https://635a7cad6f97ae73a62e1637.mockapi.io/Cities";
-
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => {
+    return state.data.value;
+  });
+  const filteredData = useSelector((state) => {
+    return state.data.filtered;
+  });
   const [citySelection, setCitySelection] = useState(0);
-  const [filteredData, setFilteredData] = useState([]);
   const chartRef = useRef();
 
   useEffect(() => {
-    axios
-      .get(API_ENDPOINT)
-      .then((res) => {
-        if (res.status === 200) {
-          setData(res.data[0]);
-          setFilteredData(res.data[0]);
-        }
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }, []);
+    dispatch(fetchData());
+  }, [dispatch]);
 
   const handleChange = (e) => {
     //Check for actual select value
     const value = e.target.value;
-    //Get data according to selected value
-    if (value === 0) {
-      setFilteredData(data);
-    } else {
-      setFilteredData({
-        cities: [data.cities[value - 1]],
-        indicator1: [data.indicator1[value - 1]],
-        indicator2: [data.indicator2[value - 1]],
-      });
-    }
-
     setCitySelection(value);
+    //Get data according to selected value
+    dispatch(filter(value));
   };
 
   const handleOnDownload = (e) => {
